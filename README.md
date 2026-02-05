@@ -88,6 +88,14 @@ Built for **both leadership visibility and engineering deep dives**.
 
 ## Key Findings
 
+### 🔹 Quick View
+
+Yield: 98.05% across 200k test runs
+Weibull reliability: k=2.23, median TTF 64.8 days
+Top risk drivers: High temp (2.26×), High ripple (1.90×), calibration drift (1.67×)
+Supplier-lot clusters: OptiCore lots show elevated field return rate (~12–14% in KPI output)
+
+
 ### 🔹 Pilot Ramp Quality
 
 - Overall pass rate: **98.05%**
@@ -116,16 +124,21 @@ Top lab failure modes identified:
 - Station calibration drift: **1.67×**
 - Optic vendor (OptiCore): **1.20×**
 
-**Per-failure-mode examples:**
+**Top Root Causes by Failure Mode:**
 
-| Failure Mode          | Driver              | Lift  |
-|----------------------|---------------------|-------|
-| THERMAL_DRIFT        | High temperature    | 29.3× |
-| VOLTAGE_RIPPLE       | High ripple         | 25.4× |
-| STATION_FALSE_FAIL   | Drift station       | 14.9× |
-| OPTICS_DEGRADATION   | Optic vendor lot    | 7.4×  |
+
+| Failure Mode       |                Top Driver |  Lift | Interpretation                                        |
+| ------------------ | ------------------------: | ----: | ----------------------------------------------------- |
+| THERMAL_DRIFT      |         High Temp (≥75°C) | 29.3× | Thermal stress strongly increases drift failures      |
+| VOLTAGE_RIPPLE     |       High Ripple (≥35mV) | 25.4× | Power integrity issues drive ripple-related fails     |
+| STATION_FALSE_FAIL | Calibration Drift Station | 14.9× | Test station instability causing false fails / rework |
+| OPTICS_DEGRADATION |   Optic Vendor = OptiCore | 7.41× | Supplier-lot quality variation impacts optics health  |
+| FW_REGRESSION      |       (not these drivers) |     — | Likely driven by fw_version / rollout cohorts         |
 
 This clearly separates **environment-driven**, **process-driven**, and **supplier-driven** issues.
+
+
+
 
 ---
 
@@ -134,6 +147,20 @@ This clearly separates **environment-driven**, **process-driven**, and **supplie
 - Station false failures show **zero field confirmation**
 - Environment-driven failures correlate strongly with **field returns**
 - Certain optic vendor lots show elevated **customer impact despite passing lab tests**
+
+---
+
+---
+
+### 🔹 Conclusion
+
+- Analyzed 200k+ test runs across 10k optical line card units with a 98.05% pass rate.
+- Identified STATION_FALSE_FAIL as the dominant lab failure mode, driven by calibration drift (14.9× lift), with no corresponding field failures.
+- Quantified strong environment-driven failure modes:
+  - THERMAL_DRIFT: High temperature increases failure likelihood by 29.3×.
+  - VOLTAGE_RIPPLE: High ripple conditions increase failure likelihood by 25.4×.
+- Detected supplier quality issues where specific optic vendor lots showed 7.4× higher optics degradation rates.
+- Built a reproducible SQL + Python FMA pipeline combining manufacturing, test, telemetry, and field return data.
 
 ---
 
@@ -225,3 +252,4 @@ It directly mirrors the analytical workflow used by **hardware reliability, test
 **Vaibhav Kejriwal**  
 M.S. Electrical & Computer Engineering  
 Northeastern University
+
