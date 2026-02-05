@@ -95,6 +95,7 @@ Weibull reliability: k=2.23, median TTF 64.8 days
 Top risk drivers: High temp (2.26×), High ripple (1.90×), calibration drift (1.67×)
 Supplier-lot clusters: OptiCore lots show elevated field return rate (~12–14% in KPI output)
 
+---
 
 ### 🔹 Pilot Ramp Quality
 
@@ -252,4 +253,5 @@ It directly mirrors the analytical workflow used by **hardware reliability, test
 **Vaibhav Kejriwal**  
 M.S. Electrical & Computer Engineering  
 Northeastern University
+
 
